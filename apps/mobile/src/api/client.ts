@@ -5,6 +5,9 @@ import { Platform } from 'react-native';
 // iOS simulator can use localhost directly
 // For physical device, use your machine's LAN IP
 const getBaseUrl = () => {
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL;
+  }
   if (__DEV__) {
     if (Platform.OS === 'android') {
       return 'http://10.0.2.2:3001/api';
