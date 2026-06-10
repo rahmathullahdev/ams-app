@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Employee Model ──────────────────────────────────────────────────
+
+model Employee {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  employeeId  String   @unique @map("employee_id")
+  name        String
+  email       String   @unique
+  phone       String
+  department  String
+  designation String
+  password    String   @default("password123")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  attendances Attendance[]
+
+  @@map("employees")
+}
+
+// ─── Attendance Model ────────────────────────────────────────────────
+
+model Attendance {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  employeeId     String           @map("employee_id") @db.ObjectId
+  attendanceDate DateTime         @map("attendance_date")
+  checkIn        DateTime?        @map("check_in")
+  checkOut       DateTime?        @map("check_out")
+  status         AttendanceStatus @default(PRESENT)
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, attendanceDate])
+  @@map("attendances")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  HALF_DAY
+}

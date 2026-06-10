@@ -1,0 +1,28 @@
+{
+  "name": "employee-attendance-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:api": "turbo run dev --filter=@attendance/api",
+    "dev:mobile": "turbo run dev --filter=@attendance/mobile",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "db:generate": "turbo run db:generate --filter=@attendance/api",
+    "db:push": "turbo run db:push --filter=@attendance/api",
+    "db:seed": "turbo run db:seed --filter=@attendance/api",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}
