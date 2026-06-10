@@ -15,7 +15,8 @@
     "db:generate": "turbo run db:generate --filter=@attendance/api",
     "db:push": "turbo run db:push --filter=@attendance/api",
     "db:seed": "turbo run db:seed --filter=@attendance/api",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "eas-build-post-install": "turbo run build --filter=@attendance/shared-types"
   },
   "devDependencies": {
     "turbo": "^2.5.0",
