@@ -11,6 +11,9 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://attendanceapi-production-3b1f.up.railway.app/api"
       }
     },
     "production": {}
