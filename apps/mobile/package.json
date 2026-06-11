@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "clean": "rm -rf .expo"
+    "clean": "rm -rf .expo",
+    "eas-build-post-install": "npx turbo run build --filter=@attendance/shared-types"
   },
   "dependencies": {
     "@attendance/shared-types": "*",
